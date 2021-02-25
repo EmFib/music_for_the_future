@@ -228,6 +228,13 @@ Alas, the whole point of this project was to forecast the popularity of these au
 
 While I offer ample credit throughout my notebooks where I received help from others, I want to give an additional shoutout here to the people without whom this project would never have come to completion:
 
-
++ Prasoon Karmacharya
++ Hovanes “Hov” Gasparian
++ Charlie Rice
++ Paul Miller
++ John D. Hazard
++ Heather Johansen
++ Amy Taylor (former DSI student)
++ Kevin Gakuo (owns fychart github repo)
 
 All these people spent time, care, energy, lifeblood to help me get here. Thank you.
