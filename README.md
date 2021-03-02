@@ -8,7 +8,6 @@
 - [EDA](#EDA)
 - [Modeling](#modeling)
 - [Evaluation & Analysis](#evaluation--analysis)
-- [Conclusion & Recommendations](#conclusion--recommendations)
 - [Next Steps & Future work](#next-steps--future-work)
 - [Acknowledgements](#acknowledgements)
 
@@ -230,7 +229,7 @@ As you can see, the forecasted values do not appear to have good predictive powe
 
 This is slightly perplexing given the relatively low RMSE scores for my 2020 models with train and test sets. I think that one reason for this may be that I was using an order and seasonal order associated with 2020 data, but part of the data included in training set for the forecasts was from 2021. This could be a problem if stationarity and seasonality shifted in 2021, as this would demand different hyperparameters while I was using the same as for 2020.
 
-#### Conclusion
+#### _Conclusion_
 
 The forecasting models need to be improved before they can provide valuable insights about how popular a given audio feature will be one month into the future. While ARIMA models are notoriously limited in how far into the future they can predict with any validity, I do believe that these models can be improved by tweaking hyperparameters and the date range used for predictions.
 
