@@ -2,12 +2,12 @@
 
 ## Table of Contents
 
-- [Executive Summary](#Executive-Summary)
+- [Executive Summary](#executive-summary)
 - [Data Collection](#Data-Collection)
 - [Data Cleaning & Pre-Processing](#Data-Cleaning-&-Pre-Processing)
 - [EDA](#EDA)
-- [Modeling](#Modeling)
-- [Evaluation & Analysis](#Evaluation-&-Analysis)
+- [Modeling](#modeling)
+- [Evaluation and Analysis](#evaluation-and-analysis)
 - [Conclusion & Recommendations](#Conclusion-&-Recommendations)
 - [Next Steps & Future work](#Next-Steps-&-Future-work)
 
@@ -201,7 +201,7 @@ An example output is below:
 ![acoustic_sarimax](./code/acousticness_sarimax_2019.png)
 
 
-## Evaluation & Analysis
+## Evaluation and Analysis
 
 _See notebook: [04_model_evaluation_metrics](capstone/code/04_model_evaluation_metrics.ipynb)_
 
@@ -241,7 +241,6 @@ The forecasting models need to be improved before they can provide valuable insi
 4. Deploy: Build an application to make the predictive modeling capabilities available to more independent musicians once the product is more viable.
 5. Visualization: Implement better data visualization, e.g. [Plotly](https://plotly.com/) to development of patterns over time more clearly.
 6. Correlation: Investigate correlation with weather, political events, pandemics, etc. to begin to understand what broader societal factors interrelate with music listening habits.
-
 
 ## Acknowledgements
 
