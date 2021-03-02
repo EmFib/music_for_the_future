@@ -175,7 +175,10 @@ Using the `asdf` function, I ran individual models for each feature. I used the 
 
 An example output is below:
 
-![acoustic_2019](./code/acousticness_2019.png)
+![acoustic](./code/acousticness_2019.png)
+
+![acf](./code/acoustic_acf.png)
+
 
 
 + SARIMA
@@ -213,7 +216,7 @@ I used these tables to take the average of the RMSE score across all features fo
 
 Alas, the whole point of this project was to forecast the popularity of these audio features into the future. In the `aslkjdfals;kdjf` notebook, I use the SARIMAX models with the hyperparameters found for the 2020 data to make a forecast for each feature. The training data for each model included June 2020 - February 2021, and the forecast was made for February 21, 2021 to March 20, 2021. The forecasting plots for each feature are below:
 
-![dance_forecast](./code/dance_forecast.png)
+![danceability_forecast](./code/danceability_forecast.png)
 <!-- ![line_plots](./code/five_feature_EDA.png) -->
 
 
