@@ -1,15 +1,16 @@
-# **COVID in the QUEUE**
+# MUSIC for the FUTURE
 
 ## Table of Contents
 
 - [Executive Summary](#executive-summary)
 - [Data Collection](#Data-Collection)
-- [Data Cleaning & Pre-Processing](#Data-Cleaning-&-Pre-Processing)
+- [Data Cleaning & Pre-Processing](#Data-Cleaning-Pre-Processing)
 - [EDA](#EDA)
 - [Modeling](#modeling)
-- [Evaluation and Analysis](#evaluation-and-analysis)
-- [Conclusion & Recommendations](#Conclusion-&-Recommendations)
-- [Next Steps & Future work](#Next-Steps-&-Future-work)
+- [Evaluation & Analysis](#evaluation-analysis)
+- [Conclusion & Recommendations](#conclusion-recommendations)
+- [Next Steps & Future work](#next-steps-future-work)
+- [Acknowledgements](#acknowledgements)
 
 ## Executive Summary
 
@@ -136,7 +137,7 @@ _Note_: You will also find notebooks for 2018, 2019, and 2020 that were used to 
 
 I read the data into each notebook as the cleaned song data and then resampled it by week, to then have dataframes with weekly dataframe for each year and also for 2017-19 combined.
 
-#### Differencing  (![d](https://latex.codecogs.com/gif.latex?%5Clarge%20d))  
+#### _Differencing_  (![d](https://latex.codecogs.com/gif.latex?%5Clarge%20d))  
 
 In addition to scrutinizing the ACF/PACF and following rules for determining difference provided in this article, I used the Dickey-Fuller test and Joseph Nelson's `interpret_dftest` function to determine how many orders of differencing I needed to apply to each feature to achieve stationarity. For each feature for each year, I calculated the ![p](https://latex.codecogs.com/gif.latex?%5Csmall%20p)-value to see whether the null hypothesis of "the data are stationary" could be rejected. I also ran the tests and found the ![p](https://latex.codecogs.com/gif.latex?%5Csmall%20p)-value for the once-differenced data. Finally, I used the `ndiffs` sub-module from the `pmdarima.arima` python wrapper to estimate the number of differences required to make the time series stationary, allowing me to produce tables such as the following for each year:
 
@@ -150,7 +151,7 @@ In addition to scrutinizing the ACF/PACF and following rules for determining dif
 
 I then used the value of d provided in this table for any modeling involving that feature for that year's data.
 
-#### Other Hyperparameters
+#### _Other Hyperparameters_
 
 I used the value of d from the table above when I ran search for best values for the other two ARIMA hyperparameters, p and q. I performed the search for p and q using the function `find_p_and_q`, which searched for the hyperparameters that yielded the lowest aic given the current data and subsequently appended these values to a dataframe (with a dictionary intermediary), producing the following:
 |    | audio_feature   |   ndiffs(d) |   best_p |   best_q | order     | ARIMA_model   |   ARIMA_AIC |
@@ -165,11 +166,11 @@ I then used the values of p and q provided in this table for any modeling involv
 
 Similarly, when I got to SARIMA modeling, I searched for the best values for the seasonal orders. I used the `find_sarima_parameters` function to find the values for P,D, and Q that yielded the lowest MAE.
 
-#### Models!
+#### _Models!_
 
 I used three related time series models: ARIMA, SARIMA, and SARIMAX. I ran each in that sequential order, separately for each feature, in year-long chunks. I trained  them on the first 90% of the year and made test predictions on the remainder of the year. Details on each below.
 
-+ _ARIMA_
++ **ARIMA**
 
 Using the `arima_predict_plot` function, I ran individual models for each feature. I used the parameters from the grid searches that populated the table above. The function will perform the following tasks:
 
@@ -184,7 +185,7 @@ An example output is below:
 
 ![acoustic_arima](./code/acousticness_arima_2019.png)
 
-+ _SARIMA_
++ **SARIMA**
 
 Using the `sarima_predict_plot_seasonal` function, I then ran individual models for each feature using a SARIMA model. The difference here is that I accounted by seaonality by incorporating a seasonal order that was determined for that feature by the `find_sarima_parameters` grid search function above. The SARIMA function performed the same tasks as the ARIMA function above -- instantiating, fitting, predicting, and plotting models for each feature -- but this time with a seasonal order passed.
 
@@ -192,7 +193,7 @@ An example output is below:
 
 ![acoustic_sarima](./code/acousticness_sarima_2019.png)
 
-+ SARIMAX
++ **SARIMAX**
 
 Finaly, I used `sarima_predict_plot_exog` function to run SARIMAX models that included exogenous variables. In this case, the exogenous variables for each feature were the other four audio features. Similar to above, the function did the work of fitting a model and plotting the predictions, and I created one for each of the five audio features.
 
@@ -201,7 +202,7 @@ An example output is below:
 ![acoustic_sarimax](./code/acousticness_sarimax_2019.png)
 
 
-## Evaluation and Analysis
+## Evaluation & Analysis
 
 _See notebook: [04_model_evaluation_metrics](capstone/code/04_model_evaluation_metrics.ipynb)_
 
@@ -252,7 +253,7 @@ While I offer ample credit throughout my notebooks where I received help from ot
 + Paul D. Miller
 + John D. Hazard
 + Heather Johansen
-+ Amy Taylor (former DSI student)
++ Amy Taylor (former DSI student whose capstone project [CNN for Dance Music Classification](https://github.com/amytaylor330/CNN_for_Dance_Music_Classification) provided great inspiration for me)
 + Kevin Gakuo (owns [fycharts](https://github.com/kelvingakuo/fycharts) github repo)
 
 All these people spent time, care, energy, lifeblood to help me get here. Thank you.
