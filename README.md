@@ -4,12 +4,12 @@
 
 - [Executive Summary](#executive-summary)
 - [Data Collection](#Data-Collection)
-- [Data Cleaning & Pre-Processing](#Data-Cleaning-Pre-Processing)
+- [Data Cleaning & Pre-Processing](#Data-Cleaning--Pre-Processing)
 - [EDA](#EDA)
 - [Modeling](#modeling)
-- [Evaluation & Analysis](#evaluation-analysis)
-- [Conclusion & Recommendations](#conclusion-recommendations)
-- [Next Steps & Future work](#next-steps-future-work)
+- [Evaluation & Analysis](#evaluation--analysis)
+- [Conclusion & Recommendations](#conclusion--recommendations)
+- [Next Steps & Future work](#next-steps--future-work)
 - [Acknowledgements](#acknowledgements)
 
 ## Executive Summary
