@@ -84,7 +84,7 @@ I used two functions to merge the audio features to the Viral 50 data and prepar
 
 ## EDA
 
-_See notebook: [02_time_series_eda_viral50](./code/02_time_series_eda_viral50)_
+_See notebook: [02_time_series_eda_viral50](http://localhost:8889/lab/tree/capstone/code/02_time_series_eda_viral50.ipynb)_
 
 The data came into the EDA process as dataframes with 50 rows for each day -- each row a song that was in the Viral 50 that day. I resampled the data by week and by month, creating new dataframes that then had one row for each week or month in that subset of the data. The columns were then each of the audio features, with that row's value being the mean score for that feature as its represented in all the songs from that week or month.
 
