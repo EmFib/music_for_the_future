@@ -14,14 +14,19 @@
 ## Executive Summary
 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_How upbeat did popular music sound in the summer of 2017?_  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Do the top-charting songs have more minor chords in autumn than in spring?_   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Do listeners stream danceable hits around the holidays?_   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Is there a time of year when acoustic songs are more popular?_
+
+>_How upbeat did popular music sound in the summer of 2017?_  
+>_Do the top-charting songs have more minor chords in autumn than in spring?_   
+>_Do listeners stream danceable hits around the holidays?_   
+>_Is there a time of year when acoustic songs are more popular?_
+>_How upbeat did popular music sound in the summer of 2017?_  
+>_Do the top-charting songs have more minor chords in autumn than in spring?_   
+>_Do listeners stream danceable hits around the holidays?_   
+>_Is there a time of year when acoustic songs are more popular?_
 
 For this project, I set out to answer those questions and more. By tracking the presence of certain audio features in Spotify's most-streamed songs over time, we can start to understand patterns in the types of music that we want to hear at different times of the year and in new and changing ways over the years.
 
-Music for the Future predicts the popularity of audio features in the future based on the presence of these audio features in historical data. Using ARIMA time series modeling, I identify trends in the data and make predictions about what listening habits will look like going forward.
+**Music for the Future predicts the popularity of audio features in the future based on the presence of these audio features in historical data. Using ARIMA time series modeling, I identify trends in the data and make predictions about what listening habits will look like going forward.**
 
 We know that music evolves over time: the sound changes naturally as other cultural elements (visual artistry, fashion, etc. do). With music, we are more able to track these evolutions via discrete aural characteristics. Certainly, today's top charting songs are fairly different from those topping the charts 10/20/30/more years ago, and the question I investigate in this analysis is: Are apparent trends detectable by a data-driven analysis. And if so, can we build a machine learning model that tracks these evolutions and makes predictions on how present these characteristics will be in the coming weeks and months.   
 
@@ -35,15 +40,22 @@ While large record labels and international touring acts can afford to hire a da
 
 *For Data Collection and Cleaning/Pre-Processing, see notebook: [01_scraping_viral_50_it_sp_gr](capstone/code/01_scraping_viral_50_it_sp_gr.ipynb)*
 
+
 #### *Viral 50 Songs*
 
-I got my the Viral 50 songs from Spotify Charts using the [fycharts](https://github.com/kelvingakuo/fycharts), a complete python package will excellent documentation on the github repo. I ran code similar to the following to get the daily Viral 50 songs from Italy, Spain, and Greece. I collected the songs from January 1, 2017 - February 20, 2021 in year-long chunks. Though I ended up doing modeling only on the Italy data, I at the point of collection I was unsure exactly how the project would ensue, and I used the Spain and Greece data heavily during EDA to explore connections to the patterns I saw in the Italy music.
+I got my the Viral 50 songs from Spotify Charts using [fycharts](https://github.com/kelvingakuo/fycharts), a complete python package with excellent documentation on the github repo. I ran code similar to the following to get the daily Viral 50 songs from Italy, Spain, and Greece. I collected the songs from January 1, 2017 - February 20, 2021 in year-long chunks.
 
 ```python
   api = SpotifyCharts()
   connector = sqlalchemy.create_engine("sqlite:///../dataa/italy_2017_v50.db", echo=False)
   api.viral50Daily(output_file = "../data/italy_2017_v50.csv", output_db = connector, webhook = ["https://mywebhookssite.com/post/"], start = "2017-01-01", end = "2017-12-31", region = "it")
 ```
+
+Though I ended up doing modeling only on the Italy data, at the point of collection I was unsure exactly how the project would ensue, and I used the Spain and Greece data heavily during EDA to explore connections to the patterns I saw in the Italy music.
+
+>_**Why Italy?**_   
+>+ When I embarked on this project, I thought I might look at the correlation between audio features and the upsurge of COVID-19. Since Italy was hit very hard by COVID before its European neighbors Greece and Spain, I was curious to look at whether patterns appeared there sooner than in the other countries. Plus, I have family in Italy and love the country deeply. (Wine, pasta, romance, anarchy.... who doesn't love Italy?!)  
+> + As the project progressed, however, I realized that showing COVID correlation with any clarity was a much more involved task, and the patterns and predictive power of audio features themselves became a much more salient storyline to pursue. While I may look at correlation between the music and the pandemic in the future, this was not an accessible place to begin.
 
 #### *Audio Features*
 
@@ -53,6 +65,7 @@ For every song represented in the Viral 50 scrape, I requested data from Spotify
 pip install spotipy --upgrade
 ```
 2. Signed up for a developer account at [Spotify for Developers](https://developer.spotify.com/dashboard/applications/335a1dfd1f1b4eeaacd569c36fb342ef), which allowed me to receive a Client ID and Client Secret.
+
 3. I stored the Client Id and Client Secret (both 32 digit codes) in a file called `spotify_credentials.json`. Subsequently, I ran the following block of code at the top of the notebook used for scraping:
 ```Python
 with open("../spotify_credentials.json", "r") as json_file:
@@ -62,7 +75,7 @@ my_client_secret = creds['SPOTIPY_CLIENT_SECRET']
 client_credentials_manager = SpotifyClientCredentials(client_id=my_client_id, client_secret=my_client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 ```
-4. To make the requests, I accessed the Spotify Credentials using  `sp.audio_features()`, which I wrapped into the `get_merge_audio_features` function. The function makes the requests and stores the audio features for each song as a dictionary that is stored in a list containing dictionaries for all the songs.
+4. To make the requests, I accessed the Spotify Credentials using  `sp.audio_features()`, which I wrapped into my `get_merge_audio_features` function. The function makes the requests and stores the audio features for each song as a dictionary that is stored in a list containing dictionaries for all the songs.
 
 ## Data Cleaning & Pre-Processing
 
@@ -71,6 +84,7 @@ The data came in with no missing values so I didn't have to do much cleaning.
 I used two functions to merge the audio features to the Viral 50 data and prepare the data for EDA:
 
 + `get_merge_audio_features` function does the following:
+
   1. Requests and gets audio feature data using Spotify's Credentials flow (see above).
   2. Stores the audio features as a dictionary, separately for each song. Dictionaries are stored in a list.
   3. Converts the list of dictionaries into a dataframe and
@@ -78,9 +92,10 @@ I used two functions to merge the audio features to the Viral 50 data and prepar
 
 
 + `clean_song_features_df` function does the following:
-1. Drops unnecessary columns: `['type', 'id', 'uri', 'track_href', 'analysis_url']`
-2. Converts date column to `datetime` format and sets it as the index.
-3. Pickles clean dataframe for use in modeling.
+
+  1. Drops unnecessary columns: `['type', 'id', 'uri', 'track_href', 'analysis_url']`
+  2. Converts date column to `datetime` format and sets it as the index.
+  3. Pickles clean dataframe for use in modeling.
 
 ## EDA
 
@@ -133,7 +148,7 @@ _Note_: They are called "`model_benchmarking`" because I initially was unsure wh
 
 _Note_: You will also find notebooks for 2018, 2019, and 2020 that were used to explore how accuracy would change depending on what subset of the time series data were used to determine the best hyperparameters (`order` and `seasonal order`).
 
-I read the data into each notebook as the cleaned song data and then resampled it by week, to then have dataframes with weekly dataframe for each year and also for 2017-19 combined.
+I read the data into each notebook as the cleaned song data and then resampled it by week, to then have dataframes with weekly averaged data for each year and also for 2017-19 combined.
 
 #### _Differencing_  (![d](https://latex.codecogs.com/gif.latex?%5Clarge%20d))  
 
