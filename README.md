@@ -166,7 +166,7 @@ I then used the value of d provided in this table for any modeling involving tha
 
 #### _Other Hyperparameters_
 
-I used the value of d from the table above when I ran search for best values for the other two ARIMA hyperparameters, p and q. I performed the search for p and q using the function `find_p_and_q`, which searched for the hyperparameters that yielded the lowest aic given the current data and subsequently appended these values to a dataframe (with a dictionary intermediary), producing the following:
+I used the value of d from the table above when I ran search for best values for the other two ARIMA hyperparameters, _p_ and _q_. I performed the search for _p_ and _q_ using the function `find_p_and_q`, which searched for the hyperparameters that yielded the lowest aic given the current data and subsequently appended these values to a dataframe (with a dictionary intermediary), producing the following:
 |    | audio_feature   |   ndiffs(d) |   best_p |   best_q | order     | ARIMA_model   |   ARIMA_AIC |
 |---:|:----------------|------------:|---------:|---------:|:----------|:--------------|------------:|
 |  0 | danceability    |           1 |        2 |        1 | (2, 1, 1) | ARIMA(2,1,1)  |    -726.879 |
@@ -175,9 +175,9 @@ I used the value of d from the table above when I ran search for best values for
 |  3 | valence         |           0 |        2 |        2 | (2, 0, 2) | ARIMA(2,0,2)  |    -627.919 |
 |  4 | energy          |           0 |        5 |        2 | (5, 0, 2) | ARIMA(5,0,2)  |    -690.871 |
 
-I then used the values of p and q provided in this table for any modeling involving that feature for that year's data.
+I then used the values of _p_ and _q_ provided in this table for any modeling involving that feature for that year's data.
 
-Similarly, when I got to SARIMA modeling, I searched for the best values for the seasonal orders. I used the `find_sarima_parameters` function to find the values for P,D, and Q that yielded the lowest MAE.
+Similarly, when I got to SARIMA modeling, I searched for the best values for the seasonal orders. I used the `find_sarima_parameters` function to find the values for _P_,_D_, and _Q_ that yielded the lowest MAE.
 
 #### _Models!_
 
@@ -230,6 +230,8 @@ Once I had run all the models for each feature separately for 2017, 2018, 2019, 
 |  4 | energy          |           1 |        2 |        0 | (2, 1, 0) | ARIMA(2,1,0)  |    -224.361 |          0.026839  |         0.0206405 | 2, 0, 0, 49      | 0, 0, 2, 51               |           0.0269028 |         0.0165696  |         0.0109944 |        0.0126909 |   2020 |
 
 I used these tables to take the average of the RMSE score across all features for each type of model. Though different years yielded somewhat different values for the mean RMSE score, SARIMAX proved to be the most successful model for 2019 and 2020 data and was not far behind for the other years. I ended up using the SARIMAX models for each year in the presentation attached to this project.
+
+#### _Forecasting_
 
 Alas, the whole point of this project was to forecast the popularity of these audio features into the future. In the [05_visualizations_and_forecasts](capstone/code/05_visualizations_and_forecasts.ipynb) notebook, I use the SARIMAX models with the hyperparameters found for the 2020 data to make a forecast for each feature. The training data for each model included June 2020 - February 2021, and the forecast was made for February 21, 2021 to March 20, 2021. The forecasting plots for each feature are below:
 
