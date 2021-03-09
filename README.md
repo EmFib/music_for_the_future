@@ -260,7 +260,7 @@ The forecasting models need to be improved before they can provide valuable insi
 
 ## Acknowledgements
 
-While I offer ample credit and citations throughout my notebooks, I want to express extra gratitude for the following people, without whom this project may never have come to completion:
+While I offer ample credit and citations throughout my notebooks, I want to express extra gratitude to the following people, without whom this project may never have come to completion:
 
 + Prasoon Karmacharya
 + Hovanes “Hov” Gasparian
