@@ -38,7 +38,7 @@ While large record labels and international touring acts can afford to hire a da
 
 ## Data Collection
 
-*For Data Collection and Cleaning/Pre-Processing, see notebook: [01_scraping_viral_50_it_sp_gr](capstone/code/01_scraping_viral_50_it_sp_gr.ipynb)*
+*For Data Collection and Cleaning/Pre-Processing, see notebook: [01_scraping_viral_50_it_sp_gr](https://github.com/EmFib/music_for_the_future/blob/master/code/01_scraping_viral_50_it_sp_gr.ipynb)*
 
 
 #### *Viral 50 Songs*
@@ -99,7 +99,7 @@ I used two functions to merge the audio features to the Viral 50 data and prepar
 
 ## EDA
 
-_See notebook: [02_time_series_eda_viral50](http://localhost:8889/lab/tree/capstone/code/02_time_series_eda_viral50.ipynb)_
+_See notebook: [02_time_series_eda_viral50](https://github.com/EmFib/music_for_the_future/blob/master/code/02_time_series_eda_viral50.ipynb)_
 
 The data came into the EDA process as dataframes with 50 rows for each day -- each row a song that was in the Viral 50 that day. I resampled the data by week and by month, creating new dataframes that then had one row for each week or month in that subset of the data. The columns were then each of the audio features, with that row's value being the mean score for that feature as its represented in all the songs from that week or month.
 
@@ -139,10 +139,10 @@ Five features used for modeling:
 
 I implemented the modeling separately for each year, so you will find four separate notebooks with models in the repo:
 
-+ 2017: [03a_model_benchmarking_2017](capstone/code/03a_model_benchmarking_2017.ipynb)
-+ 2018: [03a_model_benchmarking_2018](capstone/code/03a_model_benchmarking_2018.ipynb)
-+ 2019: [03a_model_benchmarking_2019](capstone/code/03a_model_benchmarking_2019.ipynb)
-+ 2020: [03a_model_benchmarking_2020](capstone/code/03a_model_benchmarking_2020.ipynb)
++ 2017: [03a_model_benchmarking_2017](https://github.com/EmFib/music_for_the_future/blob/master/code/03a_model_benchmarking_2017.ipynb)
++ 2018: [03a_model_benchmarking_2018](https://github.com/EmFib/music_for_the_future/blob/master/code/03a_model_benchmarking_2018.ipynb)
++ 2019: [03a_model_benchmarking_2019](https://github.com/EmFib/music_for_the_future/blob/master/code/03a_model_benchmarking_2019.ipynb)
++ 2020: [03a_model_benchmarking_2020](https://github.com/EmFib/music_for_the_future/blob/master/code/03a_model_benchmarking_2020.ipynb)
 
 _Note_: They are called "`model_benchmarking`" because I initially was unsure whether these would be benchmarks leading to a one final model or be used as my final models. (Spoiler alert: I ultimately used these year-specific models as my final models and did not roll them into one that would be used for all the modeling and evaluation. For predicting the future, I used the hyperparameters and models built on 2020 data.)
 
@@ -217,7 +217,7 @@ An example output is below:
 
 ## Evaluation & Analysis
 
-_See notebook: [04_model_evaluation_metrics](capstone/code/04_model_evaluation_metrics.ipynb)_
+_See notebook: [04_model_evaluation_metrics](https://github.com/EmFib/music_for_the_future/blob/master/code/04_model_evaluation_metrics.ipynb)_
 
 Once I had run all the models for each feature separately for 2017, 2018, 2019, and 2020, I loaded all my individual results for the AIC and RMSE scores for each year into one dataframe containing all calculated metrics for that year like this one for 2020:
 
@@ -233,7 +233,7 @@ I used these tables to take the average of the RMSE score across all features fo
 
 #### _Forecasting_
 
-Alas, the whole point of this project was to forecast the popularity of these audio features into the future. In the [05_visualizations_and_forecasts](capstone/code/05_visualizations_and_forecasts.ipynb) notebook, I use the SARIMAX models with the hyperparameters found for the 2020 data to make a forecast for each feature. The training data for each model included June 2020 - February 2021, and the forecast was made for February 21, 2021 to March 20, 2021. The forecasting plots for each feature are below:
+Alas, the whole point of this project was to forecast the popularity of these audio features into the future. In the [05_visualizations_and_forecasts](https://github.com/EmFib/music_for_the_future/blob/master/code/05_visualizations_and_forecasts.ipynb) notebook, I use the SARIMAX models with the hyperparameters found for the 2020 data to make a forecast for each feature. The training data for each model included June 2020 - February 2021, and the forecast was made for February 21, 2021 to March 20, 2021. The forecasting plots for each feature are below:
 
 ![danceability_forecast](./code/danceability_forecast.png)
 ![energy_forecast](./code/energy_forecast.png)
@@ -260,7 +260,7 @@ The forecasting models need to be improved before they can provide valuable insi
 
 ## Acknowledgements
 
-While I offer ample credit throughout my notebooks where I received help from others, I want to give an additional shoutout here to the people without whom this project would never have come to completion:
+While I offer ample credit and citations throughout my notebooks, I want to express extra gratitude for the following people, without whom this project may never have come to completion:
 
 + Prasoon Karmacharya
 + Hovanes “Hov” Gasparian
@@ -271,4 +271,4 @@ While I offer ample credit throughout my notebooks where I received help from ot
 + Amy Taylor (former DSI student whose capstone project [CNN for Dance Music Classification](https://github.com/amytaylor330/CNN_for_Dance_Music_Classification) provided great inspiration for me)
 + Kevin Gakuo (owns [fycharts](https://github.com/kelvingakuo/fycharts) github repo)
 
-All these people spent time, care, energy, lifeblood to help me get here. Thank you.
+All these people spent time, care, energy, lifeblood to help me put this project together. Thank you.
