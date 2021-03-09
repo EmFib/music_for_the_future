@@ -271,4 +271,4 @@ While I offer ample credit and citations throughout my notebooks, I want to expr
 + Amy Taylor (former DSI student whose capstone project [CNN for Dance Music Classification](https://github.com/amytaylor330/CNN_for_Dance_Music_Classification) provided great inspiration for me)
 + Kevin Gakuo (owns [fycharts](https://github.com/kelvingakuo/fycharts) github repo)
 
-All these people spent time, care, energy, lifeblood to help me put this project together. Thank you.
+All these people spent time, care, energy, and lifeblood to help me put this project together. Thank you.
